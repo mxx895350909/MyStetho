@@ -94,19 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setDB() {
-//        new MyStethoAsyncTask().execute();
-        Toast.makeText(MainActivity.this, "Name:Tony\nAge:18", Toast.LENGTH_SHORT).show();
-        SQLiteDatabase db = DBManager.getInstance(MainActivity.this).dbHelper.getWritableDatabase();
-        db.beginTransaction();
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("Name", "Tony");
-        contentValues.put("Age", 18);
-        db.insertWithOnConflict(DBHelper.TABLE_NAME, null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
-
-        db.setTransactionSuccessful();
-        db.endTransaction();
-        db.close();
+        new MyStethoAsyncTask().execute();
     }
 
     @Override
@@ -134,19 +122,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             db.beginTransaction();
 
             ContentValues contentValues = new ContentValues();
-            contentValues.put("Id", 7);
             contentValues.put("Name", "Tony");
             contentValues.put("Age", 18);
-            db.insertOrThrow(DBHelper.TABLE_NAME, null, contentValues);
+            db.insertWithOnConflict(DBHelper.TABLE_NAME, null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
 
             db.setTransactionSuccessful();
+            db.endTransaction();
             db.close();
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Toast.makeText(MainActivity.this, "Id:7\nName:Tony\nAge:18", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Name:Tony\nAge:18", Toast.LENGTH_SHORT).show();
         }
     }
 }
