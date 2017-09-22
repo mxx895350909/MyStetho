@@ -30,4 +30,6 @@ dependencies {
     compile files('libs/stetho-1.1.0.jar')
     compile files('libs/stetho-urlconnection-1.1.0.jar')
     compile files('libs/commons-cli-1.2.jar')
+    compile 'com.squareup.okhttp:okhttp:2.3.0'
+    compile 'com.facebook.stetho:stetho-okhttp:1.1.0'
 }
